@@ -1,0 +1,441 @@
+CODE 1 
+#include<iostream>
+using namespace std;
+
+class Stack{
+    private:
+    char arr[1000];
+    int top;
+    int n;
+    
+    public:
+    Stack(int num){
+        top = -1;
+        n= num;
+    }
+    
+    bool isfull(){
+        return(top == n-1);
+    }
+    bool isEmpty(){
+        return (top == -1);
+    }
+    
+    
+    void push(char c){
+        if(isfull()){
+            cout<<"Stack is Full";
+            return;
+        }
+        top = top +1;
+        arr[top] = c;
+    }
+    
+    int pop(){
+        if(isEmpty()){
+            cout<<"Stack os empty";
+            return 0;
+        }
+        return arr[top--];
+    }
+    char peek(){
+        if(isEmpty()){
+            cout<<"Stack is Empty";
+            return '\0';
+        }
+        return arr[top];
+    }
+};
+
+int main(){
+    int n,total = 0;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input!";
+        return 0;
+    }
+    Stack stack(n);
+    for(int i=1;i<=n;i++){
+        stack.push(i);
+    }
+    for(int i=1;i<=n;i++){
+        total+= stack.pop();
+    }
+    
+    cout<<"Sarah could climb "<<n<<" steps: "<<total;
+}
+Input
+10
+
+Output
+Sarah could climb 10 steps: 55
+
+_______________________________________________________________________________________
+CODE 2 
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *top = nullptr;
+
+void push(int num){
+    node *newNode = new node();
+    newNode ->data = num;
+    newNode->next = top;
+    top = newNode;
+}
+
+void traverse(){
+    node *ptr = top;
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr ->next;
+    }
+    cout<<endl;
+}
+
+void pop(){
+    if(top==nullptr){
+        cout<<"Stack is empty"<<endl;
+        return;
+    }
+    cout<<top->data<<" is removed in the stack."<<endl;
+    node *temp = top;
+    top = top->next;
+    delete temp;
+}
+
+int main(){
+    int n,num,n1;
+    cin>>n;
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        push(num);
+    }
+    
+    cin>>n1;
+    cout<<"The inventory items are: ";
+    traverse();
+    for(int i=0;i<n1;i++){
+        pop();
+    }
+    cout<<"The final inventory items are: ";
+    traverse();
+}
+Input
+5 
+1 2 3 4 5 
+3
+
+Output
+The inventory items are: 5 4 3 2 1 
+5 is removed in the stack.
+4 is removed in the stack.
+3 is removed in the stack.
+The final inventory items are: 2 1 
+
+________________________________________________________________________________________________________________
+CODE 3
+#include <iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    Node *next;
+};
+
+Node *top = nullptr;
+
+void push(int num){
+    Node *newNode = new Node();
+    newNode->data = num;
+    
+    if(top == nullptr){
+        top = newNode;
+    }
+    else{
+        newNode->next = top;
+        top = newNode;
+    }
+    
+}
+
+void traverse(){
+    Node *ptr = top;
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    
+    cin>>n;
+    if(n<=0){
+        cout<<"Invalid input: Total number of tasks must be a positive integer.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        push(num);
+    }
+    
+    traverse();
+}
+
+Input
+4 
+1 2 3 4
+
+Output
+4 3 2 1 
+
+________________________________________________________________________________________________________________
+CODE 4
+#include<iostream>
+using namespace std;
+
+
+class Stack{
+    private:
+        char arr[10000];
+        int top;
+        int n;
+    public:
+        Stack(int num){
+            top = -1;
+            n = num;
+        }
+        bool isFull(){
+            return (top == n-1);
+        }
+        bool isEmpty(){
+            return (top == -1);
+        }
+        void push(char charac){
+            if(isFull()){
+                cout << "Stack is Full";
+                return;
+            }
+            ++top;
+            arr[top] = charac;
+        }
+        void pop(){
+            if(isEmpty()){
+                cout << "Stack is empty";
+                return ;
+            }
+            --top;
+        }
+        char peek(){
+            if(isEmpty()){
+                cout << "Stack is empty";
+                return '\0';
+            }
+            return arr[top];
+        }
+};
+
+int main(){
+    string a;
+    cin >> a;
+    int num = a.length();
+    Stack stack(num);
+    for(int i=0;i<num;i++){
+        if(stack.isEmpty() || a[i] == '(' || a[i] == '{' || a[i] == '['){
+            stack.push(a[i]);
+        }
+        else if((stack.peek() == '(' && a[i] == ')') ||
+                (stack.peek() == '{' && a[i] == '}') ||
+                (stack.peek() == '[' && a[i] == ']')){
+            stack.pop();
+        }else{
+            cout << "No";
+            return 0;
+        }
+        
+    }
+    if(stack.isEmpty()){
+        cout << "Yes";
+    }else{
+        cout << "No";
+    }
+}
+
+Input
+()
+
+Output
+Yes
+
+_______________________________________________________________________________________________________
+CODE 5 
+#include<iostream>
+using namespace std;
+
+int n;
+
+class Stack{
+    private:
+    char arr[100];
+    int top;
+    
+    public :
+    Stack(int n){
+        arr[n];
+        top = -1;
+    }
+    
+    bool isFull(){
+        return (top == n-1);
+    }
+    
+    bool isEmpty(){
+        return (top == -1);
+    }
+    
+    void push(char c){
+        if(isFull()){
+            cout<<"Stack is Full";
+            return;
+        }
+        arr[++top] = c;
+    }
+    
+    char pop(){
+        if(isEmpty()){
+            cout<<"Stack is empty";
+            return 0;
+        }
+        return arr[top--];
+    }
+};
+
+int main(){
+    string a,b="";
+    cin>>a;
+    n = a.length();
+    Stack stack(n);
+    for(int i=0;i<a.length();i++){
+        stack.push(a[i]);
+    }
+    for(int i=0;i<a.length();i++){
+        b+=stack.pop();
+    }
+    
+    if(a == b){
+        cout<<"\""<<a<<"\" is a palindrome."<<endl;
+    }
+    else{
+        cout<<"\""<<a<<"\" is not a palindrome."<<endl;
+    }
+}
+
+Input
+
+MADAM
+Output
+
+"MADAM" is a palindrome.
+
+_________________________________________________________________________________________________________________________________
+CODE 6
+#include <iostream>
+using namespace std;
+
+
+class Stack{
+    private:
+    int arr[100];
+    int top;
+    int n;
+    
+    public:
+    Stack(int num){
+        top = -1;
+        n = num;
+    }
+    bool isFull(){
+        return (top == n-1);
+    }
+    
+    bool isEmpty(){
+        return (top == -1);
+    }
+    
+    void push(int num){
+        if(isFull()){
+            cout<<"Stack Overflow";
+            return;
+        }
+        arr[++top] = num;
+    }
+    void pop(){
+        if(isEmpty()){
+            cout<<"Stack Underflow";
+            return;
+        }
+        cout<<"Popped: "<<arr[top--]<<endl;
+    }
+    char peek(){
+        if(isEmpty()){
+            cout<<"Stack is empty";
+            return '\0';
+        }
+        return arr[top];
+    }
+    
+    void traverse(){
+        cout<<"Stack: ";
+        for(int i=top;i>=0;i--){
+            cout<<arr[i]<<" ";
+        }
+    }
+    
+};
+
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n>100){
+        cout<<"Size exceeds maximum limit";
+        return 0;
+    }
+    Stack stack(n);
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        stack.push(num);
+    }
+    
+    stack.traverse();
+    cout<<endl;
+    // stack.pop();
+    for(int i=0;i<n;i++){
+        stack.pop();
+    }
+    // cout<<endl;
+    stack.traverse();
+}
+
+Input
+5
+10 20 30 40 50
+
+Output
+Stack: 50 40 30 20 10 
+Popped: 50
+Popped: 40
+Popped: 30
+Popped: 20
+Popped: 10
+Stack: 
+
