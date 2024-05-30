@@ -1,0 +1,435 @@
+CODE 1:
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    
+    if(head==nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+void display(){
+    ptr = head;
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<=0){
+        cout<<"Invalid Number";
+        return 0;
+    }
+    int a[n];
+    
+    cout<<"Array: ";
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+        // a[i]=num;
+    }
+    
+    for(int i=0;i<n;i++){
+        // cin>>num;
+        cout<<a[i]<<" ";
+    }
+    cout<<endl<<"Linked List: ";
+    for(int i=0;i<n;i++){
+        createNode(a[i]);
+    }
+    display();
+}
+
+Input
+3
+5687 9921 4318
+
+Output
+Array: 5687 9921 4318 
+Linked List: 5687 9921 4318 
+
+
+__________________________________________________________________________________________________________
+CODE 2:
+
+#include<iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+};
+node *head,*tail,*newNode,*ptr,*temp,*temp1;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }else{
+        newNode->next = head;
+        head = newNode;
+    }
+}
+int midd(int n){
+    ptr = head;
+    if(n%2 == 1){
+        int middle = n/2;
+        for(int i=1;i<=middle;i++){
+            ptr = ptr->next;
+        }
+    }else{
+        int middle = n/2;
+        for(int i=1;i<=middle;i++){
+            ptr = ptr->next;
+        }
+    }
+    return ptr->data;
+}
+
+void deletion(int num){
+    temp = head;
+    temp1 = head->next;
+    
+    while(temp1->data != num){
+        temp = temp->next;
+        temp1 = temp1->next;
+    }
+    temp->next = temp1->next;
+}
+void display(){
+    ptr = head;
+    while(ptr!=nullptr){
+        cout << ptr->data << " ";
+        ptr=ptr->next;
+    }
+}
+int main(){
+    int n,num,mid;
+    cin >> n;
+    if(n<0){
+        cout << "Invalid Length" << endl;
+        cout << "Please enter the number of Node more than 3";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin >> num;
+        createNode(num);
+    }
+    cout << "Original list: ";
+    display();
+    
+    mid = midd(n);
+    deletion(mid);
+    cout << endl << "After removing the middle element from the list: " ;
+    display();
+}
+
+Input
+5
+10 20 30 40 50
+
+Output
+Original list: 50 40 30 20 10 
+After removing the middle element from the list: 50 40 20 10 
+
+_____________________________________________________________________________________________________________
+CODE 3 :
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+node *head,*tail,*newNode,*temp,*temp1,*ptr;
+int n;
+int arr[10000];
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    if(head == nullptr){
+        head = newNode;
+        tail =  newNode;
+    }else{
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+int duplicate(){
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(arr[i] == arr[j]){
+                return arr[i];
+            }
+        }
+    }
+    return 0;
+}
+void ArrRemo(int dup){
+    for(int i=0;i<n;i++){
+        if(arr[i] == dup){
+            for(int j=i;j<n;j++){
+                arr[j] = arr[j+1];
+            }
+            break;
+        }
+    }
+    cout << "Array after removing duplicates: " ;
+    for(int i=0;i<n-1;i++){
+        cout << arr[i] << " ";
+    }
+}
+void LLRemo(int num){
+    temp = head;
+    temp1 = head->next;
+    
+    while(temp1->data != num){
+        temp = temp->next;
+        temp1 = temp1->next;
+    }
+    temp->next = temp1->next;
+    
+    cout << endl << "Linked list after removing duplicates: ";
+    ptr = head;
+    while(ptr != nullptr){
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    }
+}
+int main(){
+    int num,dup;
+    cin >> n;
+    if(n<0){
+        cout << "Invalid input. Please enter a non-negative integer.";
+        return 0;
+    }
+    arr[n];
+    for(int i=0;i<n;i++){
+        cin >> num;
+        arr[i] = num;
+        createNode(num);
+    }
+    dup = duplicate();
+    
+    ArrRemo(dup);
+    LLRemo(dup);
+}
+
+Input
+5
+4 5 6 7 5
+
+Output
+Array after removing duplicates: 4 6 7 5 
+Linked list after removing duplicates: 4 6 7 5 
+
+____________________________________________________________________________________________
+CODE 4:
+#include<iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    if (head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }else{
+        newNode->next = head;
+        head = newNode;
+    }
+}
+
+void display(){
+    ptr = head;
+    cout << "The list contains the data entered: ";
+    while(ptr != nullptr){
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    cin >> n;
+    if(n < 0){
+        cout << "Invalid Input";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin >> num;
+        createNode(num);
+    }
+    display();
+}
+
+Input
+4
+21 61 28 34
+
+Output
+The list contains the data entered: 34 28 61 21 
+
+________________________________________________________________________________________________________________
+
+CODE 5 :
+#include<iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+};
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }else{
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+void mid(int n){
+    ptr = head;
+    if(n%2 == 1){
+        int middle = n/2;
+        for(int i=1;i<=middle;i++){
+            ptr = ptr->next;
+        }
+    }else{
+        int middle = n/2;
+        for(int i=1;i<middle;i++){
+            ptr = ptr->next;
+        }
+    }
+    cout << ptr->data;
+}
+int main(){
+    int n,num;
+    cin >> n;
+    if(n<0){
+        cout << "Invalid input";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin >> num;
+        createNode(num);
+    }
+    cout << "Middle element of the list is: ";
+    mid(n);
+}
+
+Input
+4
+87 53 12 32
+
+Output
+Middle element of the list is: 53
+
+_________________________________________________________________________________________________________
+
+CODE 6:
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+int n;
+int arr[100000];
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }else{
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+
+void findInArr(int num){
+    for(int i=0;i<n;i++){
+        if(arr[i] == num){
+            cout << "Element found at position " << i << " in the array." << endl;
+            return;
+        }
+    }
+    cout << "Element not found in the array." << endl;
+}
+
+void findInLL(int num){
+    int cnt = 0;
+    ptr = head;
+    while(ptr!=nullptr){
+        if(ptr->data == num){
+            cout << "Element found at position " << cnt << " in the linked list.";
+            return;
+        }
+        cnt++;
+        ptr = ptr->next;
+    }
+    cout << "Element not found in the linked list.";
+}
+
+int main(){
+    int num,findNum;
+    cin >> n;
+    
+    if(n<0){
+        cout << "Invalid Number of Elements";
+        return 0;
+    }
+    arr[n];
+    for(int i=0;i<n;i++){
+        cin >> num;
+        arr[i] = num;
+        createNode(num);
+    }
+    cin >> findNum;
+    
+    
+    findInArr(findNum);
+    findInLL(findNum);
+}
+
+Input
+4
+63 28 90 75
+90
+
+Output
+Element found at position 2 in the array.
+Element found at position 2 in the linked list.
