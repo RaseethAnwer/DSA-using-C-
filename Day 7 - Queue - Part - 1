@@ -1,0 +1,475 @@
+CODE 1
+#include<iostream>
+using namespace std;
+
+int front;
+int back;
+int arr[100];
+
+class Queue{
+    private:
+    int n;
+    
+    public:
+    Queue(int num){
+        n = num;
+        arr[num];
+        front = -1;
+        back = -1;
+    }
+    
+    bool isEmpty(){
+        return (front == -1 || front>back);
+    
+    }
+    
+    bool isFull(){
+        return (back == n-1);
+    }
+    
+    void enqueue(int num){
+        if(isFull()){
+            cout<<"Queue is Full";
+            return;
+        }
+        back++;
+        arr[back] = num;
+        if(front == -1){
+            front = 0;
+        }
+    }
+            
+};
+
+int main(){
+    int n,num,cnt = 0;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input for the number of ropes.";
+        return 0;
+    }
+    Queue queue(n);
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        if(num<0){
+            cout<<"Invalid input for rope length.";
+            return 0;
+        }
+        queue.enqueue(num);
+    }
+    
+    for(int i=front;i<=back;i++){
+        if(i==0){
+            cnt += arr[i];
+        }
+        else{
+            cnt+=(i *arr[i]);
+        }
+    }
+    cout<<cnt;
+}
+        
+Input
+4
+4 3 2 6
+
+Output
+29
+
+___________________________________________________________________________________________________
+CODE 2
+#include<iostream>
+using namespace std;
+
+class Queue{
+    private:    
+        int n;
+        int arr[1000];
+        int front;
+        int back;
+    public:
+        Queue(int num){
+            n = num;
+            arr[n];
+            front = -1;
+            back = -1;
+        }
+        
+        bool isFull(){
+            return (back == n-1);
+        }
+        
+        bool isEmpty(){
+            return (front == -1 || front > back);
+        }
+        
+        void enqueue(int num){
+            if(isFull()){
+                cout << "Production line queue is full. Unable to enqueue the part.";
+                return;
+            }
+            back++;
+            arr[back] = num;
+            if(front == -1){
+                front = 0;
+            }
+        }
+        
+        void dequeue(){
+            if(isEmpty()){
+                cout << "Production line queue is empty. Unable to dequeue any part.";
+                return;
+            }
+            front++;
+        }
+        void display(){
+            for(int i=front;i<=back;i++){
+                cout << arr[i] << " ";
+            }
+        }
+};
+
+int main(){
+    int n,num,delCnt;
+    cin >> n;
+    
+    Queue queue(n);
+    for(int i=0;i<n;i++){
+        cin >> num;
+        queue.enqueue(num);
+    }
+    cin >> delCnt;
+    if(delCnt > n){
+        cout << "Production line queue is empty. Unable to dequeue any part.Production line queue is empty.";
+        return 0;
+    }
+    for(int i=0;i<delCnt;i++){
+        queue.dequeue();
+    }
+    queue.display();
+}
+
+Input
+5
+1 2 3 4 5
+2
+
+Output
+3 4 5 
+_______________________________________________________________________________________________________________
+CODE 3
+#include <iostream>
+using namespace std;
+
+class Queue{
+    private:
+    int n;
+    int front;
+    int back;
+    int arr[100];
+    
+    public :
+    Queue(int num){
+        n= num;
+        arr[num];
+        front = -1;
+        back = -1;
+        
+    }
+    bool isFull(){
+        return (back == n-1);
+    }
+    
+    bool isEmpty(){
+        return (front == -1 || front > back);
+    }
+    
+    void enqueue(int num){
+        if(isFull()){
+            cout<<"Queue is Full";
+            return;
+        }
+        
+        ++back;
+        arr[back] = num;
+        if(front == -1){
+            front = 0;
+        }
+        cout<<num<<" is inserted in the Queue."<<endl;
+    }
+    
+    void mid(){
+        int cnt = 0,middle;
+        for(int i=front;i<=back;i++){
+            cnt++;
+        }
+        if(cnt%2 == 0){
+            middle = ((cnt/2) - 1);
+        }
+        else{
+            middle = cnt/2;
+        }
+        cout<<"The mid value in the Queue is: "<<arr[middle];
+    }
+    
+};
+    int main(){
+        int n,num;
+        cin>>n;
+        if(n<=0){
+            cout<<"Invalid input. Please enter a positive integer.";
+            return 0;
+        }
+        Queue queue(n);
+        for(int i=0;i<n;i++){
+            cin>>num;
+            queue.enqueue(num);
+        }
+        queue.mid();
+    }
+    
+Input
+5
+12 22 32 42 52
+
+Output
+12 is inserted in the Queue.
+22 is inserted in the Queue.
+32 is inserted in the Queue.
+42 is inserted in the Queue.
+52 is inserted in the Queue.
+The mid value in the Queue is: 32
+__________________________________________________________________________________________________________
+CODE 4
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int sTime;
+    int dTime;
+    Node *next;
+    
+};
+
+Node *head,*tail,*newNode,*ptr;
+
+int cnt = 0;
+void enqueue(int sTime, int dTime){
+    newNode = new Node();
+    newNode->sTime = sTime;
+    newNode->dTime = dTime;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+
+int main(){
+    int n,sTime,dTime;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input! Please enter a valid integer for the number of customer requests.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>sTime>>dTime;
+        
+        if(sTime<dTime){
+            enqueue(sTime,dTime);
+            cnt++;
+        }
+        else if(sTime>dTime){
+            cout<<"Invalid input! Drop-off time must be greater than pick-up time for request"<<cnt;
+            return 0;
+        }
+        
+        
+    }
+    cout<<cnt;
+}
+
+Input
+
+3
+10 15
+12 17
+14 18
+Output
+
+3
+
+_____________________________________________________________________________________________
+CODE 5
+#include<iostream>
+using namespace std;
+
+struct node{
+    string data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void Enqueue(string a){
+    newNode = new node();
+    newNode -> data = a;
+    if(head == nullptr){
+        head  = newNode ;
+        tail = newNode;
+        
+    }
+    else{
+        tail -> next = newNode;
+        tail = newNode;
+    }
+    cout<<newNode->data<<" is inserted in the Queue."<<endl;
+}
+
+void dequeue(){
+    cout<<head->data<<" dequeued from the queue."<<endl;
+    head = head ->next;
+}
+
+void display(){
+    ptr = head;
+    cout<<"The Final Queue is: ";
+    while(ptr!=nullptr){
+        cout<<ptr-> data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,decnt;
+    cin>>n;
+    cin.ignore();
+    string name;
+    
+    for(int i=0;i<n;i++){
+        getline(cin, name);
+        Enqueue(name);
+    }
+    
+    cin>>decnt;
+    
+    for(int i=0;i<decnt;i++){
+        dequeue();
+    }
+    
+    display();
+    
+}
+
+Input
+
+5
+Laptop
+Mobile
+Camera
+Tablet
+Headphones
+3
+Output
+
+Laptop is inserted in the Queue.
+Mobile is inserted in the Queue.
+Camera is inserted in the Queue.
+Tablet is inserted in the Queue.
+Headphones is inserted in the Queue.
+Laptop dequeued from the queue.
+Mobile dequeued from the queue.
+Camera dequeued from the queue.
+The Final Queue is: Tablet Headphones 
+
+_______________________________________________________________________________________________________
+CODE 6
+#include<iostream>
+using namespace std;
+//int arr[5] = {1,2,3,4,5};
+
+//string arr[] = {"hi","hello","welcome"}
+class Queue{
+    private:
+    string arr[100];
+    int n;
+    int front;
+    int back;
+    
+    public:
+    Queue(int num){
+        n = num;
+        arr[n];
+        front = -1;
+        back = -1;
+    }
+    
+    bool isFull(){
+        return (back == n-1);
+    }
+    bool isEmpty(){
+        return (front == -1 || front > back);
+    }
+    
+    void enqueue(int n){
+        if(isFull()){
+            cout<<"Queue is full."<<" Customer"<<n<<" cannot join the queue. Please wait for a while.";
+        }
+        ++back;
+        arr[back] = "Customer" + to_string(n);
+       
+        if(front == -1){
+            front = 0;
+        }
+    }
+    
+    void dequeue(){
+        if(isEmpty()){
+            cout<<"Queue is empty.";
+            return;
+        }
+        front++;
+    }
+    
+    void display(){
+        for(int i=front;i<=back;i++){
+            cout<<arr[i]<<" ";
+        }
+    }
+};
+
+
+int main(){
+    int n;
+    cin>>n;
+    if(n<=0){
+        cout<<"Invalid input. Please enter a positive integer for the maximum queue size.";
+        return 0;
+    }
+    Queue queue(n);
+    for(int i=1;i<=n;i++){
+        queue.enqueue(i);
+        queue.display();
+        cout<<endl;
+    }
+    queue.enqueue(n+1);
+    
+}
+
+Input
+5
+
+Output
+Customer1 
+Customer1 Customer2 
+Customer1 Customer2 Customer3 
+Customer1 Customer2 Customer3 Customer4 
+Customer1 Customer2 Customer3 Customer4 Customer5 
+Queue is full. Customer6 cannot join the queue. Please wait for a while.
+
+______________________________________________________________________________________
