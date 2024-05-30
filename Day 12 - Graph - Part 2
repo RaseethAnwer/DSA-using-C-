@@ -1,0 +1,450 @@
+CODE 1
+
+#include <iostream>
+#include <list>
+using namespace std;
+
+class Graph {
+  int numVertices;
+  list<int>* adjLists;
+  bool* visited;
+  int* parent;
+
+public:
+Graph(int vertices) {
+  numVertices = vertices;
+  adjLists = new list<int>[vertices];
+  visited = new bool[vertices];
+  parent = new int[vertices];
+  for (int i = 0; i < vertices; ++i) {
+    visited[i] = false;
+    parent[i] = -1;
+  }
+}
+
+
+void addEdge(int src, int dest) {
+  adjLists[src].push_back(dest);
+  adjLists[dest].push_back(src); // Since the graph is undirected
+}
+
+bool containsCycle() {
+  for (int start = 0; start < numVertices; ++start) {
+    if (!visited[start]) {
+      list<int> queue;
+      visited[start] = true;
+      queue.push_back(start);
+
+      while (!queue.empty()) {
+        int current = queue.front();
+        queue.pop_front();
+
+        for (int neighbor : adjLists[current]) {
+          if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            parent[neighbor] = current;
+            queue.push_back(neighbor);
+          } else if (parent[current] != neighbor) {
+            return true; // Cycle detected
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+};
+int main() {
+  int vertices, edges, u, v;
+  cin >> vertices >> edges;
+  Graph g(vertices);
+
+  for (int i = 0; i < edges; i++) {
+    cin >> u >> v;
+    g.addEdge(u, v);
+  }
+
+  if (g.containsCycle()) {
+    cout << "The social network contains cycles." << endl;
+  } else {
+    cout << "The social network does not have cycles." << endl;
+  }
+
+  return 0;
+}
+
+Input
+
+6 5 0 1 1 2 2 3 3 4 4 5
+Output
+
+The social network does not have cycles.
+___________________________________________________________________________
+CODE 2
+
+#include <iostream>
+#include <list>
+using namespace std;
+
+class Graph {
+  int numVertices;
+  list<int>* adjLists;
+  bool* visited;
+  int* parent;
+
+public:
+Graph(int vertices) {
+  numVertices = vertices;
+  adjLists = new list<int>[vertices];
+  visited = new bool[vertices];
+  parent = new int[vertices];
+  for (int i = 0; i < vertices; ++i) {
+    visited[i] = false;
+    parent[i] = -1;
+  }
+}
+void addEdge(int src, int dest) {
+  adjLists[src].push_back(dest);
+  adjLists[dest].push_back(src);
+}
+
+bool containsCycle() {
+  for (int start = 0; start < numVertices; ++start) {
+    if (!visited[start]) {
+      list<int> queue;
+      visited[start] = true;
+      queue.push_back(start);
+
+      while (!queue.empty()) {
+        int current = queue.front();
+        queue.pop_front();
+
+        for (int neighbor : adjLists[current]) {
+          if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            parent[neighbor] = current;
+            queue.push_back(neighbor);
+          } else if (parent[current] != neighbor) {
+            return true; // Cycle detected
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+};
+int main() {
+  int u, v;
+  int vertices;
+  cin>>vertices;
+  Graph g(vertices);
+  while (cin >> u && u != -1 && cin >> v) {
+    g.addEdge(u, v);
+  }
+  if (g.containsCycle()) {
+    cout << "The graph contains a cycle." << endl;
+  } else {
+    cout << "The graph does not contain a cycle." << endl;
+  }
+}
+
+Input
+
+4 0 1 1 2 2 0 -1
+Output
+
+The graph contains a cycle.
+___________________________________________________________________________
+CODE 3
+
+#include <iostream>
+#include <list>
+using namespace std;
+
+class Graph {
+  int numVertices;
+  list<int>* adjLists;
+  bool* visited;
+
+public:
+Graph(int vertices) {
+  numVertices = vertices;
+  adjLists = new list<int>[vertices];
+}
+
+void addEdge(int src, int dest) {
+  adjLists[src].push_back(dest);
+  adjLists[dest].push_back(src);
+}
+
+void BFS(int startVertex) {
+  visited = new bool[numVertices];
+  for (int i = 0; i < numVertices; i++)
+    visited[i] = false;
+
+  list<int> queue;
+
+  visited[startVertex] = true;
+  queue.push_back(startVertex);
+
+  list<int>::iterator i;
+
+  while (!queue.empty()) {
+    int currVertex = queue.front();
+    cout << currVertex << " ";
+    queue.pop_front();
+
+    for (i = adjLists[currVertex].begin(); i != adjLists[currVertex].end(); ++i) {
+      int adjVertex = *i;
+      if (!visited[adjVertex]) {
+        visited[adjVertex] = true;
+        queue.push_back(adjVertex);
+      }
+    }
+  }
+}
+};
+int main() {
+  int vertices, edges, u, v, startVertex;
+  cin >> vertices >> edges;
+  Graph g(vertices);
+  for (int i = 0; i < edges; i++) {
+    cin >> u >> v;
+    g.addEdge(u, v);
+  }
+  cin >> startVertex;
+  cout << "BFS Traversal:" <<endl;
+  g.BFS(startVertex);
+}
+
+Input
+
+5 6 0 1 0 2 1 3 1 4 2 4 3 4 0
+Output
+
+BFS Traversal:
+0 1 2 3 4 
+___________________________________________________________________________
+CODE 4
+
+#include<iostream>
+using namespace std;
+
+int vertices,top = -1;
+int stackArr[100];
+int matrix[50][50];
+bool visited[100];
+
+class Stack {
+    public:
+        bool isFull(){
+            return (top == vertices - 1);
+        }
+        
+        bool isEmpty() {
+            return (top == -1);
+        }
+        
+        void push(int num) {
+            top = top + 1;
+            stackArr[top] = num;
+        }
+        
+        int pop() {
+            int a = stackArr[top];
+            top = top - 1;
+            return a;
+        }
+};
+
+void dfs(int startVertex) {
+    Stack stack;
+    stack.push(startVertex);
+    visited[startVertex] = true;
+    while(!stack.isEmpty()) {
+        int currentVertex = stack.pop();
+        cout<<currentVertex<<" ";
+        for(int i=vertices-1;i>0;i--) {
+            if(matrix[currentVertex][i] == 1 && !visited[i]) {
+                visited[i] = true;
+                stack.push(i);
+            }
+        }
+    }
+}
+
+int main() {
+    int edges,startVertex,sour,dest;
+    cin>>vertices>>edges;
+    for(int i=0;i<vertices;i++) {
+        visited[i] = false;
+        for(int j=0;j<vertices;j++)
+            matrix[i][j] = 0;
+    }
+    for(int i=0;i<edges;i++) {
+        cin>>sour>>dest;
+        matrix[sour][dest] = 1;
+        matrix[dest][sour] = 1;
+    }
+    cin>>startVertex;
+    cout<<"DFS Traversal:\n";
+    dfs(startVertex);
+    return 0;
+}
+
+Input
+
+5 6 0 1 0 2 1 3 1 4 2 4 3 4 0
+Output
+
+DFS Traversal:
+0 1 3 4 2 
+___________________________________________________________________________
+CODE 5
+
+#include <iostream>
+#include <list>
+using namespace std;
+
+class Graph {
+  int numVertices;
+  list<int>* adjLists;
+  bool* visited;
+  public:
+    Graph(int vertices) {
+      numVertices = vertices;
+      adjLists = new list<int>[vertices];
+    }
+    void addEdge(int src, int dest) {
+      adjLists[src].push_back(dest);
+      adjLists[dest].push_back(src);
+    }
+    void BFS(int startVertex) {
+      visited = new bool[numVertices];
+      for (int i = 0; i < numVertices; i++)
+        visited[i] = false;
+    
+      list<int> queue;
+      visited[startVertex] = true;
+      queue.push_back(startVertex);
+    
+      list<int>::iterator i;
+      while (!queue.empty()){
+        int currVertex = queue.front();
+        cout << currVertex <<" ";
+        queue.pop_front();
+        for (i = adjLists[currVertex].begin(); i != adjLists[currVertex].end(); ++i) {
+          int adjVertex = *i;
+          if (!visited[adjVertex]) {
+            visited[adjVertex] = true;
+            queue.push_back(adjVertex);
+          }
+        }
+      }
+    }
+};
+int main(){
+  int vertices, edges, u, v, startVertex;
+  cin >> vertices >> edges;
+  Graph g(vertices);
+  for (int i = 0; i < edges; i++) {
+    cin >> u >> v;
+    g.addEdge(u, v);
+  }
+  cin >> startVertex;
+  cout << "Level Order Traversal:" <<endl;
+  g.BFS(startVertex);
+}
+
+Input
+
+5 6 0 1 0 2 1 3 1 4 2 4 3 4 0
+Output
+
+Level Order Traversal:
+0 1 2 3 4 
+___________________________________________________________________________
+CODE 6
+
+#include <iostream>
+using namespace std;
+
+int qu[100];
+int peek = -1,n;
+int arr[100][100];
+bool a[100];
+
+class Stack{
+    public :
+    bool isEmpty(){
+        return (peek == -1);
+    }
+    
+    bool isFull(){
+        return (peek == n-1);
+        
+    }
+    
+    void push(int num){
+        if(isFull()){
+            cout<<"Stack is Full";
+        }
+        else{
+            qu[++peek] = num;
+        }
+    }
+    int pop(){
+        int a = qu[peek];
+        peek--;
+        return a;
+    }
+    
+};
+
+void DFStraversal(int startIndex){
+    Stack st;
+    st.push(startIndex);
+    a[startIndex] = true;
+    
+    while(!st.isEmpty()){
+        int currentVertex = st.pop();
+        cout<<currentVertex<<" ";
+        for(int i = n-1;i>=0;i--){
+            if(arr[currentVertex][i] == 1 && !a[i]){
+                a[i] = true;
+                st.push(i);
+            }
+        }
+    }
+}
+
+int main(){
+    int from,to,edges,startIndex;
+    cin>>n>>edges;
+    
+    for(int i=0;i<n;i++){
+        a[i] = false;
+        for(int j=0;j<n;j++){
+            arr[i][j] = 0;
+        }
+    }
+    
+    for(int i=0;i<edges;i++){
+        cin>>from>>to;
+        arr[from][to] = 1;
+        arr[to][from] = 1;
+    }
+    
+    cin>>startIndex;
+    cout<<"DFS Traversal:"<<endl;
+    DFStraversal(startIndex);
+}
+
+Input
+
+5 6 0 1 0 2 1 3 1 4 2 4 3 4 0
+Output
+
+DFS Traversal:
+0 1 3 4 2 
