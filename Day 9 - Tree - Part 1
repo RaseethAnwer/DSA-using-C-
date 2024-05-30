@@ -1,0 +1,465 @@
+CODE 1
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+node *root;
+class Tree{
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }else{
+            if(root->data > num){
+                root->left = insert(root->left,num);
+            }else if (root->data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            cout << root->data << " ";
+            display(root->right);
+        }
+    }
+};
+int main(){
+    int n,num,insertNum;
+    cin >> n;
+    if(n > 0){
+        Tree tree;
+        for(int i=0;i<n;i++){
+            cin >> num;
+            tree.ins(num);
+        }
+        cout << "Before Insertion: ";
+        tree.display(root);
+        
+        cin >> insertNum;
+        tree.ins(insertNum);
+        
+        cout << endl << "After Insertion: ";
+        tree.display(root);
+        
+    }else{
+        cout << "Invalid input. Please enter a non-negative integer.";
+    }
+}
+Input
+
+6
+1 2 3 7 5 6
+4
+Output
+
+Before Insertion: 1 2 3 5 6 7 
+After Insertion: 1 2 3 4 5 6 7 
+
+___________________________________________________________________________________________________
+CODE 2
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+
+node *root;
+bool flag = false;
+
+class Tree{
+    
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }
+        else{
+            if(root->data < num){
+                root->right = insert(root->right,num);
+            }  
+            else if(root->data > num){
+                
+                root->left = insert(root->left,num);
+                
+            }
+            return root;
+        }
+    }
+    
+    void display(node *root,int findNUm){
+        if(root != nullptr){
+            display(root->left,findNUm);
+            if(root->data == findNUm){
+                flag = true;
+                return;
+            }
+            
+            display(root->right,findNUm);
+        }
+    }
+    
+};
+
+int main(){
+
+int n,num,findNUm;
+cin>>n;
+Tree tree;
+
+for(int i=0;i<n;i++){
+    cin>>num;
+    tree.ins(num);
+}
+cin>> findNUm;
+
+tree.display(root,findNUm);
+if(flag){
+    cout<<"Found";
+}
+else{
+    cout<<"Not Found";
+}
+}
+
+Input
+
+5
+20 10 30 5 15
+25
+Output
+
+Not Found
+
+________________________________________________________________________________
+CODE 3
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+
+node *root;
+
+class Tree{
+    public :
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root, int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }
+        else{
+            if(root->data > num){
+                
+                root->left = insert(root->left,num);
+                
+            }
+            else if(root->data <num){
+                
+                root->right = insert(root->right,num);
+                
+            }
+            return root;
+        }
+    }
+    
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            cout<<root->data<<" ";
+            display(root->right);
+        }
+    }
+};
+
+int main(){
+    int n,num;
+    if(cin>>n){
+    Tree tree;
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        tree.ins(num);
+    }
+    tree.display(root);
+}
+else{
+    cout<<"Invalid input. Please enter a non-negative integer.";
+}
+}
+
+Input
+
+5
+1 2 3 4 5
+Output
+
+1 2 3 4 5 
+
+________________________________________________________________________________________________
+CODE 4
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+node *root;
+class Tree{
+    public:
+    void ins(int num){
+    root = insert(root,num);
+    }
+    node * insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }else{
+            if(root->data < num){
+                root->right = insert(root->right,num);
+            }else if(root->data > num){
+                root->left = insert(root->left,num);
+            }
+            return root;
+        }
+    }
+    void display(node *root){
+        if(root != nullptr){
+            if(root->left == nullptr){
+                cout << root->data ;
+                return;
+            }
+            display(root->left);
+        }
+    }
+};
+
+int main(){
+    int n,num;
+    if(cin >> n){
+        Tree tree;
+        for(int i=0;i<n;i++){
+            cin >> num;
+            tree.ins(num);
+        }
+        tree.display(root);
+    }else{
+        cout << "Invalid input. Please enter a positive integer.";
+    }
+    
+}
+Input
+3
+5 3 7
+Output
+
+3
+
+____________________________________________________________________________________________________
+CODE 5
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node* left;
+    node* right;
+};
+
+node* root;
+
+class Tree {
+    public:
+    node* insertValue(node* root, int num) {
+        if (root == nullptr) {
+            root = new node();
+            root->data = num;
+            return root;
+        }
+        if (num < root->data)
+            root->left = insertValue(root->left, num);
+        else if (num > root->data)
+            root->right = insertValue(root->right, num);
+        return root;
+    }
+    
+    void insert(int num) {
+        root = insertValue(root, num);
+    }
+    
+    node* deleteRec(node* root, int num) {
+        if (root == nullptr) {
+            return root;
+        }
+        if (num < root->data) {
+            root->left = deleteRec(root->left, num);
+        }
+        else if (num > root->data) {
+            root->right = deleteRec(root->right, num);
+        }
+        else {
+            if (root->left == nullptr) {
+                node* temp = root->right;
+                delete root;
+                return temp;
+            }
+            else if (root->right == nullptr) {
+                node* temp = root->left;
+                delete root;
+                return temp;
+            }
+            root->data = minValue(root->right);
+            root->right = deleteRec(root->right, root->data);
+        }
+        return root;
+    }
+    
+    int minValue(node* root) {
+        if(root->left == nullptr){
+            return root->data;
+        }
+        return minValue(root->left);
+    }
+    
+    void display(node* root) {
+        if (root != nullptr) {
+            display(root->left);
+            cout << root->data << " ";
+            display(root->right);
+        }
+    }
+};
+
+int main() {
+    Tree tree;
+    int n, v;
+    cin >> n;
+ 
+    for (int i = 0; i < n; i++) {
+        cin >> v;
+        tree.insert(v);
+    }
+    
+    int del;
+    cin >> del;
+    cout << "Before Deletion: ";
+    tree.display(root);
+    tree.deleteRec(root, del);
+    cout << endl << "After Deletion: " ;
+    tree.display(root);
+    return 0;
+}
+
+Input
+
+7
+50 30 70 20 40 60 80
+30
+Output
+
+Before Deletion: 20 30 40 50 60 70 80 
+After Deletion: 20 40 50 60 70 80 
+
+___________________________________________________________________________________________________
+CODE 6
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+
+node *root;
+
+class Tree{
+    public :
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }
+        else{
+            if(root->data < num){
+                
+                root->right = insert(root->right,num);
+            }
+            else if(root->data > num){
+                root->left = insert(root->left,num);
+             }
+        }
+        return root;
+    }
+    int height(node *root){
+        if(root == nullptr) return -1;
+        
+        int Ldepth = height(root->left);
+        
+        int Rdepth = height(root->right);
+        
+        if(Ldepth > Rdepth){
+         return (Ldepth + 1);
+        }
+        else{
+            return (Rdepth + 1);
+        }
+        
+    }
+    
+};
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    Tree tree;
+    for(int i=0;i<n;i++){
+        cin>>num;
+        tree.ins(num);
+    }
+   cout<<"Height of BST: "<<tree.height(root);
+}
+
+Input
+
+7
+50 30 70 20 40 60 80
+Output
+
+Height of BST: 2
+
+_________
