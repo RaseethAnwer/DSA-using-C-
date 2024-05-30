@@ -1,0 +1,400 @@
+CODE 1 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        tail=newNode;
+    }
+    tail->next = head;
+}
+
+void display(){
+    ptr = head;
+    cout<<"The circular linked list is: ";
+    do{
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+    while(ptr!=head);
+        
+}
+
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Please enter a non-negative integer for the number of nodes.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    display();
+}
+
+Input
+3 
+7 8 6
+
+Output
+The circular linked list is: 7 8 6 
+
+__________________________________________________________________________________________________________
+CODE 2 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr,*front,*back;
+
+void createNode(int num){
+    newNode = new node();
+    newNode-> data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail -> next = newNode;
+        tail = newNode;
+    }
+    tail ->next = head;
+}
+void insertion(int val,int pos){
+    newNode = new node();
+    newNode ->data = val;
+    front = head;
+    back = head->next;
+    for(int i=1;i<pos;i++){
+        front = front->next;
+        back = back->next;
+    }
+    front ->next = newNode;
+    newNode ->next = back; 
+}
+
+void display(){
+    ptr = head;
+    do{
+        cout<<ptr->data<<" ";
+        ptr = ptr ->next;
+    }
+    while(ptr != head);
+}
+
+int main(){
+    int num,val,pos;
+    
+    for(int i=0;i<3;i++){
+        cin>>num;
+        createNode(num);
+    }
+    cin>>val>>pos;
+    insertion(val,pos);
+    display();
+}
+
+Input
+100 200 300
+400 2
+
+Output
+100 200 400 300 
+____________________________________________________________________________________________________________________
+CODE 3
+
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode -> data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail ->next = newNode;
+        tail = newNode;
+    }
+    tail ->next = head;
+}
+
+void display(int val){
+    ptr = head;
+    do{
+        if(ptr->data == val){
+            cout<<"Value found in the list";
+            return;
+        }
+        // cout<<ptr -> data<<" ";
+        ptr = ptr -> next;
+    }
+    while(ptr!=head);
+    cout<<"Value not found in the list";
+}
+
+
+
+int main(){
+    int num,val;
+    
+    for(int i=0;i<5;i++){
+        if(cin>>num){
+        createNode(num);
+    }
+    else{
+        cout<<"Invalid input. Please enter an integer.";
+        return 0;
+    }
+    }
+    cin>>val;
+    display(val);
+}
+Input
+100 200 300 400 500 
+200
+
+Output
+Value found in the list
+
+_________________________________________________________________________________________________________________
+
+CODE 4
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr,*current;
+
+node *createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    return newNode;
+}
+
+void insertSorted(int num){
+    newNode = createNode(num);
+    if(head == nullptr || head->data>=num){
+        newNode->next = head;
+        head = newNode;
+        
+    }
+    else{
+        current = head;
+        while(current->next != nullptr && current->next->data <= num){
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next =newNode;
+    }
+}
+
+void display(){
+    ptr = head;
+    cout<<"Sorted List: ";
+    
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    // cin>>n;
+    
+    for(int i=0;i<5;i++){
+        if(cin>>num){
+            insertSorted(num);
+        }
+        else{
+            cout<<"Invalid input. Please enter a valid integer.";
+            return 0;
+        }
+    }
+    display();
+}
+
+Input
+10 20 40 30 50
+
+Output
+Sorted List: 10 20 30 40 50 
+
+________________________________________________________________________________________________________________
+CODE 5
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode -> data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        newNode -> prev = tail;
+        tail = newNode;
+    }
+    tail->next = head;
+    head -> prev = tail;
+}
+
+void displayOriginal(){
+    ptr = head;
+    cout<<"Original Circular Linked List: ";
+    do{
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+    while(ptr!=head);
+}
+
+void displayReversed(){
+    ptr = tail;
+    cout<<"Reversed Circular Linked List: ";
+    do{
+        cout<<ptr->data<<" ";
+        ptr = ptr -> prev;
+    }
+    while(ptr!=tail);
+}
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Please enter a positive integer.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    displayOriginal();
+    cout<<endl;
+    displayReversed();
+}
+Input
+5
+100 200 300 400 500
+
+Output
+Original Circular Linked List: 100 200 300 400 500 
+Reversed Circular Linked List: 500 400 300 200 100 
+___________________________________________________________________________________________________________________
+CODE 6 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode ->data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail ->next = newNode;
+        tail = newNode;
+    }
+    tail -> next = head;
+}
+
+void display(int val){
+    ptr = head;
+    int count = 1;
+    do{
+        if(ptr->data == val){
+            cout<<"Node found at position: "<<count;
+            return;
+        }
+        ptr = ptr->next;
+        count++;
+    }
+    while(ptr!=head);
+    cout<<"Node not found in the circular linked list.";
+}
+
+
+
+int main(){
+    int n,num,val;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Please enter a positive integer.";
+        r
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    cin>>val;
+    display(val);
+}
+
+Input
+5 
+235 423 169 786 516 
+786
+
+Output
+Node found at position: 4
+
