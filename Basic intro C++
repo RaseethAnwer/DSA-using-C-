@@ -1,1 +1,297 @@
 Question 1
+
+Imagine you're working with a program to manage a classroom seating arrangement. Assume the
+number of students in the class as input. If the input is zero or negative, print "Invalid Input" .Use a
+pointer to store the number of students and display both its value and memory address.
+
+Input Format:
+The input consists of a single integer, representing the value of the variable var.
+
+Output Format:
+If the input integer is less than or equal to 0, the program should output "Invalid Input" and
+terminate.
+Otherwise, the program should output two lines:
+The value of the variable var.
+The value pointed to by the pointer ptr
+
+CODE:
+#include <iostream>
+using namespace std;
+
+int main(){
+    
+    int a,*ptr;
+    cin>>a;
+    ptr = &a;
+    if(a<=0){
+        cout<<"Invalid Input";
+    }
+    else{
+    cout<<"Value at var = "<<a<<endl;
+    cout<<"Value at *ptr = "<<*ptr<<endl;
+    }
+}
+
+
+____________________________________________________________________________________________________
+
+Question 2 
+Assume you are working with a program that stores information about a user's profile. The user's
+profile consists of an integer representing their ID number and a string representing their
+username. You decide to use a structure to store this information.
+Execute a program that prompts the user to input their ID number (an integer) followed by their
+username (a string). The program should then store this information in a structure and output the
+ID number and username in the format specified below.
+
+Input Format:
+The first line contains an integer n (1 ? n ? 1000), representing the user's ID number.
+The second line contains a string s, representing the user's username. The length of s does not
+exceed 100 characters.
+
+Output Format:
+Print "Invalid Input" for non-positive or zero size.
+The user's ID number.
+The user's username
+
+
+CODE :
+#include<iostream>
+using namespace std;
+
+int main(){
+    int n,num,pos,val;
+    cin>>n;
+    int a[n];
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        a[i] = num;
+    }
+    cin>>pos>>val;
+    
+    if(pos<0){
+        cout<<"Invalid position. Position should be between 0 and "<<n<<" (inclusive).";
+        
+    }
+    else{
+        a[n+1];
+        
+        for(int i=(n);i>=0;i--){
+            if(i!=pos){
+                a[i]=a[i-1];
+            }
+            else{
+                a[i]=val;
+                break;
+            }
+        }
+        for(int i=0;i<=n;i++){
+            cout<<a[i]<<" ";
+        }
+    }
+}
+
+___________________________________________________________________________________________________
+
+Question 3 
+
+In your treasure hunt adventure game, players embark on an epic journey to explore a mysterious
+island teeming with secrets and treasures. As players navigate through dense forests, treacherous
+mountains, and ancient ruins, they encounter a myriad of challenges that test their wit and courage.
+To aid them in their quest, players collect various items scattered across the island, each holding
+clues to the island's hidden treasures.
+However, not all treasures are easily accessible. Some are guarded by cunning puzzles, hidden
+traps, or locked mechanisms that require specific items or combinations to unlock. This is where
+the feature comes into play: the application suggests pairs of items with a specific difference in
+value that players can use strategically to overcome obstacles and unlock hidden treasures.
+
+Input Format:
+The program expects the user to input two integers separated by a space: N (the number of
+integers) and K (the desired difference).
+Following the input of N and K, the user should input N distinct integers separated by spaces.
+
+Output Format:
+If the input for N is invalid (not a positive integer), the program outputs: "Invalid input for N.
+Please enter a positive integer."
+If any of the input integers are invalid (not valid integers), the program outputs: "Invalid input.
+Please enter valid integers."
+Otherwise, the program outputs a single integer representing the count of pairs of integers from
+the input list that have a difference equal to K.
+
+CODE:
+#include<iostream>
+using namespace std;
+
+struct{
+    int num;
+    string name;
+}var;
+int main(){
+    
+    cin>>var.num;
+    cin>>var.name;
+    
+    if(var.num<=0){
+    
+        cout<<"Invalid Input"<<endl;
+    }
+    else{
+    cout<<var.num<<endl;
+    cout<<var.name<<endl;
+    }
+}
+
+
+______________________________________________________________________________________________________
+
+Question 4
+
+Suppose you are tasked with writing a program to store information about two cars. Each car's
+information consists of its brand (a string), model (a string), and year of manufacture (an integer).
+You decide to use a structure to represent each car's information.
+Execute a program that prompts the user to input information about two cars: the brand, model,
+and year of manufacture for each car. The program should then store this information in two
+separate structures and output the details of each car.
+
+Input Format:
+The first three lines represent the information for the first car:
+The brand of the first car (a string).
+The model of the first car (a string).
+The year of manufacture of the first car (an integer).
+The next three lines represent the information for the second car, following the same format as
+above.
+
+Output Format:
+For any Invalid Input , Print "Invalid Input"
+The brand, model, and year of manufacture of the first car separated by spaces.
+The brand, model, and year of manufacture of the second car separated by spaces
+
+CODE :
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n,val,num,count=0,dif1,dif2;
+    cin>>n>>val;
+    int a[n];
+    if(n<=0){
+        cout<<"Invalid input for N. Please enter a positive integer.";
+    }
+    else{
+        for(int i=0;i<n;i++){
+            if(cin>>num){
+                a[i] = num;
+            }
+            else{
+                cout<<"Invalid input. Please enter valid integers.";
+                return 0;
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                dif1 = a[i] - a[j];
+                dif2 = a[j] - a[i];
+                    if(dif1 == val || dif2 == val){
+                        count++;
+                    }
+            }
+        }
+        cout<<count;
+    }
+    
+    
+}
+// (1 , 1)(1, 5)(1,7)(1,9)(1,11) // 0
+// (5,5)(5,7)(5,9)(5,11) // 1
+// (7,7)(7,9)(7,11) //2
+
+
+_______________________________________________________________________________________________________________________________________
+
+Question 5:
+Given two strings, str1 and str2, the task is to swap their values without using any temporary
+variables. Your mission is to identify the flaw and submit a corrected version.
+Program that accepts two strings as inputs, swaps their values without using an auxiliary variable,
+and then displays the results.
+
+Input Format:
+ Two separate lines, each containing a string. The first line will have the string for str1, and the
+second line will have the string for str2.
+
+Output Format:
+ The original values of str1 and str2 in the format: Before Swapping: str1= [value of str1] and
+str2= [value of str2]
+ The swapped values of str1 and str2 in the format: After Swapping: str1= [swapped value of
+str1] and str2= [swapped value of str2]
+
+CODE:
+#include<iostream>
+using namespace std;
+
+struct{
+    string Car_name,car_model;
+    int car_year;
+}car1,car2;
+
+int main(){
+    cin>>car1.Car_name>>car1.car_model>>car1.car_year;
+    cin>>car2.Car_name>>car2.car_model>>car2.car_year;
+    
+    if(car1.car_year>0 && car2.car_year>0){
+        cout<<car1.Car_name<<" "<<car1.car_model<<" "<<car1.car_year<<endl;
+        cout<<car2.Car_name<<" "<<car2.car_model<<" "<<car2.car_year;
+    }
+    else{
+        cout<<"Invalid Input"<<endl;
+    }
+}
+
+____________________________________________________________________________________________________________
+Question 6:
+
+A software development team is tasked with creating a feature for an online shopping cart system
+where customers can add items to their cart at specified positions within an array that represents
+the cart's contents. This feature must handle the dynamic resizing of the array and adjust the
+existing items accordingly to make space for the new ones. The system must maintain the order of
+the items and ensure quick access and updates to the cart's contents.
+
+Input Format:
+ The program prompts the user to enter the size of the array (shopping cart) is an integer, where
+1 <= size <= 1000.
+ Then the user needs to enter elements (items) in the array as integers.
+ Then position is needed to insert the new item is an integer, where 0 <= position <= size.
+
+Output Format:
+ The output displays the most recent array after inserting the new item.
+ The array should be displayed as a space-separated list of integers.
+ If the user enters wrong position the program prints, "Invalid position. Position should be
+between 0 and n (inclusive)."
+
+CODE :
+#include<iostream>
+using namespace std;
+
+int main(){
+    string str1;
+    string str2;
+    
+    cin>>str1>>str2;
+    cout<<"Before swapping:"<<endl;
+    cout<<"str1: "<<str1<<endl;
+    cout<<"str2: "<<str2<<endl;
+    
+    // string c = str1; // c = hello
+    // str1 = str2; // str 1 = world
+    // str2 = c;//str2 = hello;
+    
+    str1 = str1 + str2; // helloworld
+    str2 = str1.substr(0,str1.length() - str2.length());//
+    str1 = str1.substr(str2.length());
+    
+    cout<<"After swapping:"<<endl;
+    cout<<"str1: "<<str1<<endl;
+    cout<<"str2: "<<str2<<endl;
+}
+
+_____________________________________________________________________________________________
