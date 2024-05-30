@@ -1,0 +1,361 @@
+CODE 7
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int rNo;
+    string name;
+    node *next;
+};
+node *data,*temp;
+node * arr[71];
+
+int indexVal(int rNo){
+    return (rNo % 71);
+}
+
+void insert(int rNo,string name){
+    int index = indexVal(rNo);
+    data = new node();
+    data->rNo = rNo;
+    data->name = name;
+    if(arr[index] == nullptr){
+        arr[index] = data;
+    }else{
+        temp = arr[index];
+        while(temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = data;
+    }
+}
+void display(){
+    int n = 71;
+    for(int i=0;i<n;i++){
+        if(arr[i] != nullptr){
+        temp = arr[i];
+        while(temp != nullptr){
+            cout << temp->rNo << " " << temp->name << endl;
+            temp = temp->next;
+        }
+        }
+        
+    }
+}
+int main(){
+    int n,rNo;
+    cin >> n;
+    string name;
+    for(int i=0;i<n;i++){
+        cin >> rNo >> name;
+        insert(rNo,name);
+    
+    }
+    display();
+}
+Input
+
+3 101 Alice 102 Bob 101 Carol
+Output
+
+101 Alice
+101 Carol
+102 Bob
+____________________________________________________________________________
+CODE 8
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int rNo;
+    node *next;
+};
+
+node *data,*temp;
+node *arr[10];
+
+int keyVal(int rNo){
+    return (rNo % 10);
+}
+
+void insert(int rNo){
+    int index = keyVal(rNo);
+    data = new node();
+    data->rNo = rNo;
+    
+    if(arr[index] == nullptr){
+        arr[index] = data;
+    }
+    else{
+        temp = arr[index];
+        while(temp->next != nullptr){
+            temp= temp->next;
+            
+        }
+        temp->next = data;
+    }
+}
+
+void display(){
+    int n = 10;
+    for(int i=0;i<n;i++){
+        if(arr[i] != nullptr){
+            temp = arr[i];
+            
+            while(temp != nullptr){
+                cout<<temp->rNo<<endl;
+                temp = temp->next;
+            }
+        }
+    }
+}
+
+int main(){
+    int n,rNo;
+    cin>>n;
+    
+    for(int i=0;i<n;i++){
+        cin>>rNo;
+        insert(rNo);
+    }
+    cout<<"Hash Table:"<<endl;
+    display();
+}
+Input
+
+5 101 205 307 409 511
+Output
+
+Hash Table:
+101
+511
+205
+307
+409
+___________________________________________________________________________
+CODE 9
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int rNo;
+    string name;
+    node *next;
+};
+node *data,*temp;
+node * arr[10];
+
+int indexVal(int rNo){
+    return (rNo % 10);
+}
+
+void insert(int rNo,string name){
+    int index = indexVal(rNo);
+    data = new node();
+    data->rNo = rNo;
+    data->name = name;
+    if(arr[index] == nullptr){
+        arr[index] = data;
+    }else{
+        temp = arr[index];
+        while(temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = data;
+    }
+    cout << data->rNo << " " << data->name << endl;
+}
+
+int main(){
+    int n,rNo;
+    cin >> n;
+    string name;
+    for(int i=0;i<n;i++){
+        cin >> rNo >> name;
+        insert(rNo,name);
+    
+    }
+    
+}
+
+Input
+
+3 101 Alice 201 Bob 102 Carol
+Output
+
+101 Alice
+201 Bob
+102 Carol
+___________________________________________________________________________
+CODE 10
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int rNo;
+    node *next;
+};
+node *data,*temp;
+node * arr[100];
+
+int indexVal(int rNo){
+    return (rNo % 100);
+}
+
+void insert(int rNo){
+    int index = indexVal(rNo);
+    data = new node();
+    data->rNo = rNo;
+    if(arr[index] == nullptr){
+        arr[index] = data;
+    }else{
+        temp = arr[index];
+        while(temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = data;
+    }
+    
+}
+void search(int num){
+    int index = indexVal(num);
+    if(arr[index] != nullptr)
+        cout << "Found"<< endl;
+    else
+        cout << "Not Found"<<endl;
+}
+int main(){
+    int n,rNo,fNum,n1;
+    cin >> n;
+
+    for(int i=0;i<n;i++){
+        cin >> rNo;
+        insert(rNo);
+    }
+    cin >> n1;
+    for(int i=0;i<n1;i++){
+        cin >> fNum;
+        search(fNum);
+    }
+    
+}
+
+Input
+
+5 12 5 18 25 10 3 18 5 15
+Output
+
+Found
+Found
+Not Found
+____________________________________________________________________________
+CODE 11
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int rNo;
+    string name;
+    node *next;
+};
+
+node *data,*temp;
+node *arr[10];
+
+
+int KeyVal(int rNo){
+    return (rNo % 10);
+}
+
+void insert(int rNo){
+    int index = KeyVal(rNo);
+    data = new node();
+    data ->rNo = rNo;
+    
+    if(arr[index] == nullptr){
+        arr[index] = data;
+    }
+    else{
+        cout<<"Duplicate Products: "<<rNo;
+    }
+}
+
+int main(){
+    int n,rNo;
+    cin>>n;
+    
+    for(int i=0;i<n;i++){
+        cin>>rNo;
+        insert(rNo);
+    }
+}
+
+Input
+
+5 5 3 2 1 1
+Output
+
+Duplicate Products: 1
+___________________________________________________________________________
+CODE 12
+
+#include<iostream>
+using namespace std;
+
+int arr[100];
+int size;
+
+
+int keyVal(int key){
+    int index = key % size;
+    return index;
+}
+
+void insert(int num){
+    int index = keyVal(num);
+    
+    while(arr[index] != 0){
+        if(index == size-1){
+            index = 0;
+        }
+        else{
+            index++;
+        }
+    }
+    arr[index] = num;
+    cout<<"Hash Table: [ ";
+    for(int i = 0;i<size;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<"]"<<endl;
+}
+
+int main(){
+    int n,num;
+    cin>>size>>n;
+    arr[size];
+    for(int i=0;i<n;i++){
+        arr[i] = 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        insert(num);
+    }
+}
+
+Input
+
+5 5 2 7 13 3 8
+Output
+
+Hash Table: [ 0 0 2 0 0 ]
+Hash Table: [ 0 0 2 7 0 ]
+Hash Table: [ 0 0 2 7 13 ]
+Hash Table: [ 3 0 2 7 13 ]
+Hash Table: [ 3 8 2 7 13 ]
+
