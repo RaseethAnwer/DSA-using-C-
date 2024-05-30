@@ -1,0 +1,406 @@
+CODE 1 
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data =num;
+    
+    if(head==nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+}
+
+void display(){
+    // ptr = head;
+    // while(ptr!=nullptr){
+    //     cout<<ptr->data>>" ";
+    //     ptr = ptr->next;
+    // }
+    
+    cout<<"Empty doubly linked list created successfully!"<<endl;
+}
+
+int main(){
+    int n,num;
+    
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid Number";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    display();
+}
+
+Input
+5
+10 20 30 40 50
+
+Output
+Empty doubly linked list created successfully!
+
+_________________________________________________________________________________________
+
+CODE 2 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode ->data = num;
+    
+    if(head==nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        // tail ->next = newNode;
+        // newNode->prev = tail;
+        // tail = newNode;
+        
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+        
+    }
+    cout<<"Node inserted at the beginning successfully!"<<endl;
+}
+
+void display(){
+    ptr = head;
+    cout<<"Elements in the list: ";
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Number of nodes cannot be negative.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+display();
+}
+
+
+Input
+3
+-1 -2 -3
+
+Output
+Node inserted at the beginning successfully!
+Node inserted at the beginning successfully!
+Node inserted at the beginning successfully!
+Elements in the list: -3 -2 -1 
+
+______________________________________________________________________________________________________________
+
+CODE 3 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+node *head,*tail,*newNode,*ptr;
+
+
+void createNode(int num){
+    newNode = new node();
+    newNode ->data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+    
+    cout<<"Node inserted at the end successfully!"<<endl;
+}
+
+void display(){
+    ptr = head;
+    cout<<"Elements in the list: ";
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Number of nodes cannot be negative.";
+        return 0;
+    }
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    display();
+}
+
+Input
+5
+100 200 300 400 500
+
+Output
+Node inserted at the end successfully!
+Node inserted at the end successfully!
+Node inserted at the end successfully!
+Node inserted at the end successfully!
+Node inserted at the end successfully!
+Elements in the list: 100 200 300 400 500 
+
+_________________________________________________________________________________________________________________
+
+CODE 4 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        newNode ->prev = tail;
+        tail = newNode;
+    }
+}
+void deleteAtBeginning(){
+    head = head->next;
+    cout<<"Node deleted from the beginning successfully!"<<endl;
+}
+
+void display(){
+    ptr = head;
+    cout<<"Elements in the list: ";
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Number of nodes cannot be negative.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        
+        createNode(num);
+    }
+    deleteAtBeginning();
+    display();
+}
+
+Input
+4
+-1 0 15 -20
+
+Output
+Node deleted from the beginning successfully!
+Elements in the list: 0 15 -20 
+
+_________________________________________________________________________________________________________________________________
+CODE 5
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    
+    if(head==nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    else{
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+}
+
+void display(){
+    ptr = tail;
+    cout<<"Elements in the list: ";
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->prev;
+    }
+}
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Number of nodes cannot be negative.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    display();
+}
+
+Input
+3
+5 8 2
+
+Output
+Elements in the list: 2 8 5 
+
+___________________________________________________________________________________________________________________
+CODE 6
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head,*tail,*newNode,*ptr,*front,*back;
+
+void createNode(int num){
+    newNode = new node();
+    newNode->data = num;
+    
+    if(head == nullptr){
+        head = newNode;
+        tail = newNode;
+    }
+    
+    else{
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+}
+
+void insertion(int pos,int val){
+    newNode = new node();
+    newNode->data = val;
+    front = head;
+    back = head;
+    
+    for(int i=1;i<pos-1;i++){
+        front = front ->next;
+    }
+    
+    for(int i=1;i<pos;i++){
+        back = back ->next;
+    }
+    front->next = newNode;
+    newNode->prev = front;
+    newNode->next = back;
+    back->prev = newNode;
+    
+}
+void display(){
+    ptr = head;
+    
+    while(ptr!=nullptr){
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+}
+
+int main(){
+    int n,num,pos,val;
+    cin>>n;
+    if(n<0){
+        cout<<"Invalid input. Please enter a positive integer";
+        return 0;
+    }
+    
+    for(int i=0;i<n;i++){
+        cin>>num;
+        createNode(num);
+    }
+    cin>>pos>>val;
+    display();
+    insertion(pos,val);
+    cout<<endl;
+    display();
+}
+
+Input
+3
+5 10 15
+2 20
+
+Output
+5 10 15 
+5 20 10 15 
+_____________________________________________________________
