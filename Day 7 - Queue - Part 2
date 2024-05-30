@@ -1,0 +1,377 @@
+CODE 1 
+#include<iostream>
+using namespace std;
+class node{
+ public:
+ int data;
+ int pri;
+ node *next;
+};
+node *head,*tail,*newNode,*ptr,*temp;
+class Queue{
+ public:
+ void enQueue(int num, int priority)
+ {
+ newNode = new node();
+ newNode->data = num;
+ newNode->pri = priority;
+ if(head == nullptr || head->pri < newNode->pri){
+ newNode->next = head;
+ head = newNode;
+ }else{
+ temp = head;
+ while(temp->next != nullptr && temp->next->pri > priority ){
+ temp = temp->next;
+ }
+ newNode->next = temp->next;
+ temp->next = newNode;
+ }
+ }
+
+ void display(){
+ ptr = head;
+ while(ptr != nullptr){
+ cout << ptr->data << " ";
+ ptr = ptr->next;
+ }
+ }
+};
+int main(){
+ int n,num,priority;
+ cin >> n;
+ Queue queue;
+ for(int i=0;i<n;i++){
+ cin >> num;
+ cin >> priority;
+ queue.enQueue(num,priority);
+ }
+ queue.display();
+}
+
+Input
+
+5
+5  1
+4  2
+3  3
+2  4
+1  5
+Output
+
+1 2 3 4 5 
+
+__________________________________________________________________________________________________
+
+CODE 2
+#include<iostream>
+using namespace std;
+
+struct node{
+    string name;
+    int pri;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr,*temp;
+
+void Enqueue(string name, int pri){
+    newNode = new node();
+    newNode -> name = name;
+    newNode -> pri = pri;
+    
+    if(head == nullptr || head -> pri > newNode->pri){
+        newNode->next = head;
+        head = newNode;
+    }
+    
+    else{
+        temp = head;
+        while(temp->next != nullptr && temp->next->pri < newNode -> pri){
+            temp = temp->next;
+        }
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void display(){
+    ptr = head;
+    while(ptr != nullptr){
+        cout<<ptr->name<<" ";
+        ptr = ptr ->next;
+    }
+}
+
+
+
+int main(){
+    int n,pri;
+    string name;
+    cin>>n;
+    
+    for(int i=0;i<n;i++){
+        cin>>name>>pri;
+        Enqueue(name,pri);
+    }
+    
+    display();
+}
+Input
+
+3  
+Apple  
+2 
+Banana 
+1
+Orange 
+3
+Output
+
+Banana Apple Orange 
+_____________________________________________________________________________________________________
+CODE 3
+#include<iostream>
+using namespace std;
+class node{
+ public:
+ int data;
+ int pri;
+ node *next;
+};
+node *head,*tail,*newNode,*ptr,*temp;
+class Queue{
+ public:
+ void enQueue(int num, int priority)
+ {
+ newNode = new node();
+ newNode->data = num;
+ newNode->pri = priority;
+ if(head == nullptr || head->pri > newNode->pri){
+ newNode->next = head;
+ head = newNode;
+ }else{
+ temp = head;
+ while(temp->next != nullptr && temp->next->pri < priority ){
+ temp = temp->next;
+ }
+ newNode->next = temp->next;
+ temp->next = newNode;
+ }
+ }
+
+ void display(){
+ ptr = head;
+ while(ptr != nullptr){
+ cout << ptr->data << " ";
+ ptr = ptr->next;
+ }
+ }
+};
+int main(){
+ int n,num,priority;
+ cin >> n;
+ Queue queue;
+ for(int i=0;i<n;i++){
+ cin >> num;
+ cin >> priority;
+ queue.enQueue(num,priority);
+ }
+ queue.display();
+}
+
+Input
+
+5
+1  1
+5  5
+3  3
+2  2
+4  4
+Output
+
+1 2 3 4 5 
+
+_________________________________________________________________________________________________________
+CODE 4
+#include<iostream>
+using namespace std;
+class node{
+ public:
+ int data;
+ int pri;
+ node *next;
+};
+node *head,*tail,*newNode,*ptr,*temp;
+class Queue{
+ public:
+ void enQueue(int num)
+ {
+ newNode = new node();
+ newNode->data = num;
+ newNode->pri = num;
+ if(head == nullptr || head->pri > newNode->pri){
+ newNode->next = head;
+ head = newNode;
+ }else{
+ temp = head;
+ while(temp->next != nullptr && temp->next->pri < num ){
+ temp = temp->next;
+ }
+ newNode->next = temp->next;
+ temp->next = newNode;
+ }
+ }
+
+ void display(){
+ ptr = head;
+ while(ptr != nullptr){
+ cout << ptr->data << " ";
+ ptr = ptr->next;
+ }
+ }
+};
+int main(){
+ int n,num,priority;
+ cin >> n;
+ Queue queue;
+ for(int i=0;i<n;i++){
+ cin >> num;
+ queue.enQueue(num);
+ }
+ queue.display();
+}
+
+Input
+ 4 -20 -10 -30 -40 
+Output
+-40 -30 -20 -10 
+
+______________________________________________________________________________________________________
+CODE 5
+#include<iostream>
+using namespace std;
+struct node{
+ string data;
+ int pri;
+ node *next;
+};
+node *head,*tail,*newNode,*ptr;
+void enqueue(string a, int num){
+ newNode = new node();
+ newNode->data = a;
+ newNode->pri = num;
+ if(head == nullptr || head->pri < newNode->pri){
+ newNode->next = head;
+ head = newNode;
+ }else{
+ ptr = head;
+ while(ptr->next != nullptr && ptr->next->pri > newNode->pri){
+ ptr = ptr->next;
+ }
+ newNode->next = ptr->next;
+ ptr->next = newNode;
+ }
+}
+void display(){
+ ptr = head;
+ while(ptr!=nullptr){
+ cout << "Name: " << ptr->data << ", Priority: " << ptr->pri << endl;
+ ptr = ptr->next;
+ }
+}
+int main(){
+ int n,num;
+ string a;
+ cin >> n;
+ cin.ignore();
+ for(int i=0;i<n;i++){
+ cin >> a;
+ cin >> num;
+ cin.ignore();
+ enqueue(a,num);
+ }
+ display();
+}
+Input
+
+2 Anie 6 Alex 8
+Output
+
+Name: Alex, Priority: 8
+Name: Anie, Priority: 6
+
+______________________________________________________________________________________________________________
+CODE 6
+#include<iostream>
+using namespace std;
+
+struct node{
+    string name;
+    int pri;
+    node *next;
+};
+
+node *head,*tail,*newNode,*ptr,*temp;
+
+void Enqueue(string name, int pri){
+    newNode = new node();
+    newNode->name = name;
+    newNode->pri = pri;
+    
+    if(head == nullptr || head->pri < newNode->pri){
+        newNode->next = head;
+        head = newNode;
+    }
+    else{
+        temp = head;
+        while(temp -> next != nullptr && temp->next->pri > newNode->pri){
+            temp = temp -> next;
+        }
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+void deQueue(){
+    head = head->next;
+}
+
+void display(){
+    ptr = head;
+    while(ptr != nullptr){
+        cout<<"Name: "<<ptr->name<<", Priority: "<<ptr->pri<<endl;
+        ptr = ptr ->next;
+    }
+}
+int main(){
+    int n,pri,delcnt;
+    string name;
+    
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>name>>pri;
+        Enqueue(name,pri);
+    }
+    cin>>delcnt;
+    display();
+    
+    for(int i=0;i<delcnt;i++){
+        deQueue();
+    }
+    cout<<"Remaining queue element's are: "<<endl;
+    display();
+    
+}
+Input
+3 
+JobA 2 
+JobB 1 
+JobC 3 
+2 
+
+Output
+Name: JobC, Priority: 3
+Name: JobA, Priority: 2
+Name: JobB, Priority: 1
+Remaining queue element's are: 
+Name: JobB, Priority: 1
+
