@@ -1,0 +1,410 @@
+CODE 1 
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+node *root;
+class Tree{
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }else{
+            if(root->data > num){
+                root->left = insert(root->left,num);
+            }else if (root->data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            display(root->right);
+            cout << root->data << " ";
+        }
+    }
+};
+int main(){
+    int n,num;
+    cin >> n;
+    if(n > 0){
+        Tree tree;
+        for(int i=0;i<n;i++){
+            cin >> num;
+            tree.ins(num);
+        }
+        cout << n << endl;
+        tree.display(root);
+    }else{
+        cout << "Invalid input. Number of elements must be positive.";
+    }
+}
+Input
+
+3
+-1
+-2
+-3
+Output
+
+3
+-3 -2 -1 
+
+_______________________________________________________________________________________________
+CODE 2
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+
+node *root;
+
+class Tree{
+    public :
+    void ins(int num){
+        root = insert(root,num);
+    } 
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data= num;
+            return root;
+        }
+        else {
+            if(root->data > num){
+                root->left = insert(root->left,num);
+            }
+            else if(root -> data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    
+    void display(node *root){
+        if(root != nullptr){
+            cout<<root->data<<" ";
+            display(root->left);
+            display(root->right);
+        }
+    }
+};
+
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n>0){
+    Tree tree;
+    for(int i=0;i<n;i++){
+        cin>>num;
+        tree.ins(num);
+    }
+    tree.display(root);
+}
+else{
+    cout<<"Invalid input. Number of elements must be positive.";
+}
+}
+
+Input
+
+3
+10
+5
+15
+Output
+
+10 5 15 
+________________________________________________________________________________________________________________
+CODE 3
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+node *root;
+class Tree{
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }else{
+            if(root->data > num){
+                root->left = insert(root->left,num);
+            }else if (root->data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            cout << root->data << " ";
+            display(root->right);
+        }
+    }
+};
+int main(){
+    int n,num;
+    ;
+    if(cin >> n){
+        Tree tree;
+        for(int i=0;i<n;i++){
+            cin >> num;
+            tree.ins(num);
+        }
+        tree.display(root);
+    }else{
+        cout << "Invalid input. Please enter a non-negative integer.";
+    }
+}
+Input
+
+5
+1 2 3 4 5
+Output
+
+1 2 3 4 5 
+
+________________________________________________________________________________________________________
+CODE 4
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+    
+};
+
+node *root;
+bool flag = true;
+class Tree{
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }
+        else{
+            if(root->data > num){
+                root -> left = insert(root->left,num);
+            }
+            else if(root->data < num){
+                root->right = insert(root->right,num);
+                
+            }
+            return root;
+        }
+    }
+    
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            if(root->left == nullptr && root->right == nullptr){
+                cout<<root->data<<" ";
+            }
+            display(root->right);
+        }
+    }
+};
+
+int main(){
+    int n,num;
+    cin>>n;
+    if(n>0){
+    Tree tree;
+    for (int i=0;i<n;i++){
+        cin>>num;
+        tree.ins(num);
+        
+    }
+    tree.display(root);
+}
+else {
+    cout<<"Invalid input. Number of elements must be positive.";
+}
+}
+Input
+
+5
+8
+3
+10
+1
+6
+Output
+
+1 6 10 
+
+______________________________________________________________________________________________________
+CODE 5
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+node *root;
+bool flag = true;
+class Tree{
+    public:
+    void ins(int num){
+        root = insert(root,num);
+    }
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root->data = num;
+            return root;
+        }else{
+            if(root->data > num){
+                root->left = insert(root->left,num);
+            }else if (root->data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            if((root->left != nullptr && root->right == nullptr) || (root->left == nullptr && root->right != nullptr)){
+                flag = false;
+            }
+            display(root->right);
+        }
+    }
+};
+int main(){
+    int n,num;
+    cin >> n;
+    if(n > 0){
+        Tree tree;
+        for(int i=0;i<n;i++){
+            cin >> num;
+            tree.ins(num);
+        }
+        tree.display(root);
+        if(flag){
+            cout << "Balanced BST";
+        }else{
+            cout << "Unbalanced BST";
+        }
+    }else{
+        cout << "Invalid input. Number of elements must be positive.";
+    }
+}
+Input
+
+3
+1 2 3
+Output
+
+Unbalanced BST
+__________________________________________________________________________________________________________________
+CODE 6
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+};
+
+node *root;
+class Tree{
+    public :
+    void ins(int num){
+        root = insert(root,num);
+    }
+    
+    node *insert(node *root,int num){
+        if(root == nullptr){
+            root = new node();
+            root -> data = num;
+            return root;
+        }
+        else{
+            if(root->data >num){
+                root ->left = insert(root->left,num);
+            }
+            else if(root->data < num){
+                root->right = insert(root->right,num);
+            }
+            return root;
+        }
+    }
+    
+    void display(node *root){
+        if(root != nullptr){
+            display(root->left);
+            cout<<root->data <<" ";
+            display(root->right);
+        }
+    }
+};
+int main(){
+    int n,num;
+    cin>>n;
+    
+    if(n>0){
+    Tree tree;
+    for(int i=0;i<n;i++){
+        cin>>num;
+        tree.ins(num);
+    }
+    tree.display(root);
+}
+
+else{
+    cout<<"Invalid input. Number of elements must be positive.";
+}
+}
+
+Input
+
+5
+10
+5
+15
+3
+7
+Output
+
+3 5 7 10 15 
+
