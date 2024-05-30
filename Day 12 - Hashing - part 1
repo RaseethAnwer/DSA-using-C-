@@ -1,0 +1,342 @@
+CODE 1
+
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int key;
+    string name;
+    string gender;
+};
+
+node *data;
+int n;
+node *arr[1000];
+
+class Student{
+    public:
+    int keyVal(int key){
+        return (key % n);
+    }
+    
+    void insert(int key,string name,string gender){
+        data = new node();
+        data->key = key;
+        data->name = name;
+        data->gender = gender;
+        
+        int index = keyVal(key);
+        arr[index] = data;
+    }
+    
+    void search(int index){
+        int check = keyVal(index);
+        if(arr[check]->key == index){
+            cout<<"Student with roll number "<<index<<" found.";
+        }
+        else{
+             cout<<"No student found with roll number "<<index;
+        }
+    }
+    
+    
+};
+
+int main(){
+    int key,Sindex;
+    cin>>n;
+    
+    string name,gender;
+    Student st;
+    arr[n];
+    for(int i=0;i<n;i++){
+        cin>>key>>name>>gender;
+        st.insert(key,name,gender);
+    }
+    
+    cin>>Sindex;
+    st.search(Sindex);
+}
+
+
+Input
+
+3 101 Alice Female 102 Bob Male 103 Charlie Male 102
+Output
+
+Student with roll number 102 found.
+
+
+
+
+___________________________________________________________________________________________
+CODE 2
+
+#include<iostream>
+using namespace std;
+
+struct book {
+    int key;
+    string name;
+};
+
+book *data;
+book *arr[50];
+
+class Record {
+    public:
+        int keyVal(int key) {
+            return (key % 71);
+        }
+        
+        void insert(int key,string name) {
+            data = new book();
+            data->key = key;
+            data->name = name;
+            int index = keyVal(key);
+            if(arr[index] == nullptr)
+                arr[index] = data;
+        }
+        
+        void search() {
+            int n = 71;
+            for(int i=0;i<n;i++) {
+                if(arr[i] != nullptr)
+                    cout<<arr[i]->key<<" "<<arr[i]->name<<endl;
+            }
+        }
+};
+
+int main() {
+    Record rec;
+    int key,N;
+    string name;
+    cin>>N;
+    for(int i=0;i<N;i++) {
+        cin>>key>>name;
+        rec.insert(key,name);
+    }
+    rec.search();
+    return 0;
+}
+
+Input
+
+3 101 Programming 102 Algorithm 103
+DataStructure
+Output
+
+101 Programming
+102 Algorithm
+103 DataStructure
+_________________________________________________________________
+CODE 3
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int key;
+    string name;
+    int age;
+};
+int n;
+node *data;
+node *arr[100];
+
+class StudentRecord{
+    public :
+    
+    int KeyVal(int key){
+        return (key % 71);
+    }
+    
+    void insert(int key, string name, int age){
+        data = new node();
+        data->key = key;
+        data->name = name;
+        data->age = age;
+        
+        int index = KeyVal(key);
+        arr[index] = data;
+    }
+    
+    void search(int key){
+        int check = KeyVal(key);
+        if(arr[check] != nullptr){
+            cout<< "Student ID: "<<arr[check]->key<<endl;
+            cout<< "Name: "<<arr[check]->name<<endl;
+            cout<< "Age: "<<arr[check]->age<<endl;
+        }
+        else{
+            cout<<"Student with ID "<<key<< " not found."<<endl;
+        }
+    }
+};
+
+int main(){
+    int key,Scnt,age,Sindex;
+    cin>>n;
+    string name;
+    arr[71];
+    StudentRecord st;
+    
+    for(int i=0;i<n;i++){
+        cin>>key>>name>>age;
+        st.insert(key,name,age);
+    }
+    cin>>Scnt;
+    for(int i=0;i<Scnt;i++){
+        cin>>Sindex;
+       st.search(Sindex);
+    }
+}
+
+Input
+
+2 105 Ava 18 207 Liam 19 4 207
+105 500 600
+Output
+
+Student ID: 207
+Name: Liam
+Age: 19
+Student ID: 105
+Name: Ava
+Age: 18
+Student with ID 500 not found.
+Student with ID 600 not found.
+_______________________________________________________________________________
+CODE 4
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n,num;
+    cin>>n;
+    bool visited[n];
+    
+    for(int i=0;i<=n;i++){
+        visited[i] = false;
+    }
+    
+    for(int i=1;i<=n;i++){
+        cin >> num;
+        if(!visited[num]){
+            visited[num] = true;
+        }else{
+            cout << "Warning: Duplicate entry for student ID " << num << endl;
+        }
+        
+    }
+    
+    for(int i=1;i<=n;i++){
+        if(visited[i]){
+            cout << "Present : " << i << endl;
+        }else{
+            cout << "Absent : " << i << endl;
+        }
+    }
+}
+
+Input
+
+5 2 1 3 4 5
+Output
+
+Present : 1
+Present : 2
+Present : 3
+Present : 4
+Present : 5
+_____________________________________________________________________
+CODE 5
+
+#include<iostream>
+using namespace std;
+
+struct node{
+    int key;
+    string name;
+};
+node *data;
+
+node *arr[1000];
+class StudentRecord {
+    public:
+    int keyVal(int key){
+        return (key % 71);
+    }
+    void insert(int key,string name){
+        data = new node();
+        data->key = key;
+        data->name = name;
+        int index = keyVal(key);
+        if(arr[index] == nullptr)
+            arr[index] = data;
+    }
+    void search() {
+        int n=71;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] != nullptr) {
+        cout << "ISBN: " << arr[i]->key << ", Value: " << arr[i]->name << endl;
+        }
+    }
+}
+};
+int main(){
+    int key,num,n1,age,n;
+    cin >> n;
+    string name;
+    StudentRecord st;
+    for(int i=0;i<n;i++){
+        cin >> key >> name;
+        st.insert(key,name);
+    }
+    st.search();
+}
+
+Input
+
+3 123 Book1 456 Book2 789
+Book3
+Output
+
+ISBN: 789, Value: Book3
+ISBN: 456, Value: Book2
+ISBN: 123, Value: Book1
+__________________________________________________________________________________
+CODE 6
+#include<iostream>
+using namespace std;
+
+struct details{
+    int rollno;
+    string name;
+};
+
+int main(){
+    int n;
+    cin>>n;
+    struct details arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i].rollno;
+        cin>>arr[i].name;
+    }
+    
+    for(int i=0;i<n;i++){
+        cout<<"Roll Number: "<<arr[i].rollno<<", Name: "<<arr[i].name<<endl;
+    }
+}
+
+Input
+
+3 101 John 203 Alice
+305 Bob
+Output
+
+Roll Number: 101, Name: John
+Roll Number: 203, Name: Alice
+Roll Number: 305, Name: Bob
