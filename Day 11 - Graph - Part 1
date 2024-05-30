@@ -1,0 +1,280 @@
+CODE 1
+
+#include<iostream>
+using namespace std;
+
+
+int main(){
+    int n,sFrom,tTo;
+    cin >> n;
+    int arr[n][n];
+    
+    if(n <= 0 ){
+        cout << "Error: Number of vertices must be a positive integer.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            arr[i][j] = 0;            
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        cin >> sFrom >> tTo;
+        for(int j=0;j<n;j++){
+            arr[sFrom][tTo] = 1;        
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        cin >> sFrom >> tTo;
+        for(int j=0;j<n;j++){
+            if(arr[sFrom][tTo] == 1){
+                cout << "Edge from " << sFrom << " to " << tTo << " exists.";
+                return 0;
+            }        
+        }
+    }
+        cout << "Edge from " << sFrom << " to " << tTo << " does not exist.";
+}
+
+Input
+
+3
+1 2
+2 3
+3 4
+1 2 
+Output
+
+Edge from 1 to 2 exists.
+____________________________________________________________________________
+CODE 2
+
+#include<iostream>
+using namespace std;
+
+
+int main(){
+    int n,a;
+    cin >> n;
+    if(n <= 0){
+        cout << "Invalid number of vertices. Please enter a positive integer.";
+        return 0;
+    }
+    int arr[n][n];
+    bool visited[n] = {false}; 
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin >> arr[i][j];
+            if(arr[i][j] != 0 && arr[i][j] != 1){
+                cout << "Invalid input in the adjacency matrix. Please enter 0 or 1.";
+                return 0;
+            }
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        a = 0;
+        for(int j=0;j<n;j++){
+            if(arr[i][j] == 1){
+                a++;
+            }
+        }
+        if(a == 0){
+            cout << 0;
+            return 0;
+        }
+    }
+    cout << 1;
+}
+
+Input
+
+4
+0 1 1 0
+1 0 0 1
+1 0 0 1
+0 1 1 0
+Output
+
+1
+___________________________________________________________________________
+CODE 3
+
+#include<iostream>
+using namespace std;
+
+int main(){
+    int matrix[10][10] = {0};
+    int n,sour,dest;
+    
+    cin>>n;
+    if(n<=0){
+        cout<<"Invalid input. Please enter a positive number of users.";
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        cin>>sour>>dest;
+        if(sour<0 || sour>=n || dest <0 || dest >=n){
+            cout<<"Invalid user ID. Please enter valid user IDs.";
+            return 0;
+        }
+        matrix[sour][dest] = 1;
+        matrix[dest][sour] = 1;
+    }
+    
+    cout<<"Adjacency Matrix:";
+    for(int i=0;i<n;i++){
+        cout<<endl;
+        for(int j=0;j<n;j++){
+            cout<<matrix[i][j]<<" ";
+        }
+    }
+}
+
+Input
+
+3
+0 1
+1 2
+2 0
+Output
+
+Adjacency Matrix:
+0 1 1 
+1 0 1 
+1 1 0 
+___________________________________________________________________________
+CODE 4
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int n=4,temp=0;
+    int a[n][n];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        cin>>a[i][j];
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(a[i][j]==1)
+            temp++;
+        }
+    }
+    if(temp==n)
+        cout<<"Graph contains cycle";
+    else
+        cout<<"Graph doesn't contain cycle";
+    
+}
+
+Input
+
+0 1 0 0
+0 0 1 0
+0 0 0 1
+1 0 0 0
+Output
+
+Graph contains cycle
+___________________________________________________________________________
+CODE 5
+
+#include<iostream>
+using namespace std;
+
+
+int main(){
+    int n,a;
+    cin >> n;
+    if(n <= 0){
+        cout << "Invalid number of vertices. Please enter a positive integer.";
+        return 0;
+    }
+    int arr[n][n];
+    bool visited[n] = {false}; 
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin >> arr[i][j];
+            if(arr[i][j] != 0 && arr[i][j] != 1){
+                cout << "Invalid input in the adjacency matrix. Please enter 0 or 1.";
+                return 0;
+            }
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        a = 0;
+        for(int j=0;j<n;j++){
+            if(arr[i][j] == 1){
+                a++;
+            }
+        }
+        if(a == 0){
+            cout << "Not Connected.";
+            return 0;
+        }
+    }
+    cout << "Connected.";
+}
+
+Input
+
+4 
+0 1 1 0 
+1 0 0 1 
+1 0 0 0 
+0 1 0 0
+Output
+
+Connected.
+___________________________________________________________________________
+CODE 6
+
+#include<iostream>
+using namespace std;
+
+int main(){
+    int vertices,cnt=0;
+    cin>>vertices;
+    if(vertices<=0){
+        cout<<"Invalid input. Number of vertices should be a positive integer.";
+        return 0;
+    }
+    int matrix[vertices][vertices];
+    for(int i=0;i<vertices;i++){
+        for(int j=0;j<vertices;j++){
+            if(!(cin>>matrix[i][j])){
+                cout<<"Invalid input. Please enter integers only.";
+                return 0;
+            }
+        }
+    }
+     for(int i=0;i<vertices;i++){
+        for(int j=0;j<vertices;j++){
+            if(i != j && matrix[i][j] == 1){
+                cnt++;
+            }
+        }
+    }
+    cout<<(cnt/2);
+}
+
+Input
+
+5 
+0 1 1 1 1 
+1 0 1 1 1 
+1 1 0 1 1 
+1 1 1 0 1 
+1 1 1 1 0
+Output
+
+10
